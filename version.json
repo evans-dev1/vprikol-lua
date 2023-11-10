@@ -1,13 +1,13 @@
 {
     "version": {
         "v": "0.0.1", 
-        "url": "https://github.com/evans-dev1/vprikol-lua/vprikol.lua"
+        "url": "https://github.com/evans-dev1/vprikol-lua/blob/main/vprikol.lua"
     },
     "update": {
         "title": "Тестовое обновление",
         "mandatory": true,
         "text": [
-            "Тест",
+            "Тест"
         ]
     }
 }
