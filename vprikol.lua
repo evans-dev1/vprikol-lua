@@ -1,5 +1,5 @@
 script_name('VPrikol')
-script_version('0.0.1')
+script_version('1.0.1')
 
 local imgui = require('mimgui')
 local ffi = require('ffi')
