@@ -1,5 +1,5 @@
 script_name('VPrikol')
-script_version('0.0.1')
+script_version('1.0.2')
 
 local imgui = require('mimgui')
 local ffi = require('ffi')
@@ -107,12 +107,12 @@ function main()
     getScriptUpdate()
     while not update['check'] do wait(0) end
     sampRegisterChatCommand('vp', function() window[0] = not window[0] end)
-    sampRegisterChatCommand('checkinfo', function(id)
+    sampRegisterChatCommand('get', function(id)
         if tonumber(id) and (sampIsPlayerConnected(tonumber(id)) or tonumber(id) == select(2, sampGetPlayerIdByCharHandle(PLAYER_PED))) then
             window[0], menu['loading']['bool'] = true, true
             hotkeyMenu['informationKey'](sampGetPlayerNickname(tonumber(id)))
         else
-            sms('¬ведите: /checkinfo [id]')
+            sms('¬ведите: /get [id]')
         end
     end)
     sampRegisterChatCommand('checkrp', function(id)
@@ -647,7 +647,7 @@ function getPlayerInformation(nick, currentServer, captcha)
             ['nick'] = nick,
             ['server'] = currentServer,
             ['captcha'] = captcha or '',
-            ['preview'] = 'success'
+            ['preview'] = 'no'
         }
     }
 

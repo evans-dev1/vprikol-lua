@@ -1,13 +1,13 @@
 {
     "version": {
-        "v": "0.0.1", 
-        "url": "https://github.com/evans-dev1/vprikol-lua/blob/main/vprikol.lua"
+        "v": "1.0.2", 
+        "url": "https://raw.githubusercontent.com/evans-dev1/vprikol-lua/main/vprikol.lua"
     },
     "update": {
-        "title": "Тестовое обновление",
+        "title": "Beta release 1.0.2",
         "mandatory": true,
         "text": [
-            "Тест"
+            "Добавлена команда /get (поиск игрока)"
         ]
     }
 }
