@@ -51,7 +51,7 @@ function json()
 			file:write(encodeJson(array))
 			file:close()
 		else
-			sms('Ошибка при сохранение файла!')
+			sms('ГЋГёГЁГЎГЄГ  ГЇГ°ГЁ Г±Г®ГµГ°Г Г­ГҐГ­ГЁГҐ ГґГ Г©Г«Г !')
 		end
     end
 
@@ -102,7 +102,7 @@ local hotkeyMenu = {
 function main()
 	if not isSampfuncsLoaded() or not isSampLoaded() then return end
 	while not isSampAvailable() do wait(200) end
-    log(''); log('Скрипт запущен!')
+    log(''); log('Г‘ГЄГ°ГЁГЇГІ Г§Г ГЇГіГ№ГҐГ­!')
     getServerList()
     getScriptUpdate()
     while not update['check'] do wait(0) end
@@ -112,7 +112,7 @@ function main()
             window[0], menu['loading']['bool'] = true, true
             hotkeyMenu['informationKey'](sampGetPlayerNickname(tonumber(id)))
         else
-            sms('Введите: /checkinfo [id]')
+            sms('Г‚ГўГҐГ¤ГЁГІГҐ: /checkinfo [id]')
         end
     end)
     sampRegisterChatCommand('checkrp', function(id)
@@ -120,7 +120,7 @@ function main()
             window[0], menu['loading']['bool'] = true, true
             hotkeyMenu['checkrp'](sampGetPlayerNickname(tonumber(id)))
         else
-            sms('Введите: /checkrp [id]')
+            sms('Г‚ГўГҐГ¤ГЁГІГҐ: /checkrp [id]')
         end
     end)
     while true do wait(0)
@@ -160,59 +160,59 @@ local newFrame = imgui.OnFrame(
         imgui.SetNextWindowSize(imgui.ImVec2(600, 350), imgui.Cond.FirstUseEver)
         imgui.Begin('Frame', window, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse + imgui.WindowFlags.NoTitleBar)
             imgui.PushFont(fonts[30])
-                if menu['page'] == 1 then -->> Основная страница
+                if menu['page'] == 1 then -->> ГЋГ±Г­Г®ГўГ­Г Гї Г±ГІГ°Г Г­ГЁГ¶Г 
                     if menu['information']['nick'] then
                         imgui.PushFont(fonts[20])
                                 if method['page'] == 1 then
                                     imgui.SetCursorPosY(10)
                                     local arr = menu['information']['data']
-                                    imgui.FTextCenter(u8( ('{Text}Информация о {ButtonActive}%s{Text} на сервере {ButtonActive}%s{Text} [{ButtonActive}%s{Text}]:'):format(menu['information']['nick'], server['list'][menu['information']['server']], menu['information']['server']) ))
+                                    imgui.FTextCenter(u8( ('{Text}Г€Г­ГґГ®Г°Г¬Г Г¶ГЁГї Г® {ButtonActive}%s{Text} Г­Г  Г±ГҐГ°ГўГҐГ°ГҐ {ButtonActive}%s{Text} [{ButtonActive}%s{Text}]:'):format(menu['information']['nick'], server['list'][menu['information']['server']], menu['information']['server']) ))
                                     imgui.NewLine()
                                     imgui.BeginGroup()
-                                        imgui.FTextCenter(u8('{Text}ID аккаунта: {ButtonActive}' .. arr['accountId']), 300)
-                                        imgui.FTextCenter(u8('{Text}Уровень: {ButtonActive}' .. arr['lvl']), 300)
-                                        imgui.FTextCenter(u8('{Text}Уровень VIP: {ButtonActive}' .. arr['vipLabel']), 300)
-                                        imgui.FTextCenter(u8('{Text}Номер телефона: {ButtonActive}' .. arr['phoneNumber']), 300)
-                                        imgui.FTextCenter(u8('{Text}Состояние: {ButtonActive}' .. (arr['isOnline'] and 'Онлайн' or 'Оффлайн')), 300)
+                                        imgui.FTextCenter(u8('{Text}ID Г ГЄГЄГ ГіГ­ГІГ : {ButtonActive}' .. arr['accountId']), 300)
+                                        imgui.FTextCenter(u8('{Text}Г“Г°Г®ГўГҐГ­Гј: {ButtonActive}' .. arr['lvl']), 300)
+                                        imgui.FTextCenter(u8('{Text}Г“Г°Г®ГўГҐГ­Гј VIP: {ButtonActive}' .. arr['vipLabel']), 300)
+                                        imgui.FTextCenter(u8('{Text}ГЌГ®Г¬ГҐГ° ГІГҐГ«ГҐГґГ®Г­Г : {ButtonActive}' .. arr['phoneNumber']), 300)
+                                        imgui.FTextCenter(u8('{Text}Г‘Г®Г±ГІГ®ГїГ­ГЁГҐ: {ButtonActive}' .. (arr['isOnline'] and 'ГЋГ­Г«Г Г©Г­' or 'ГЋГґГґГ«Г Г©Г­')), 300)
                                     imgui.EndGroup()
                                     imgui.SameLine()
                                     imgui.BeginGroup()
-                                        imgui.FTextCenter(u8('{Text}Всего денег: {ButtonActive} $' .. money_separator(arr['totalMoney'])), 900)
-                                        imgui.FTextCenter(u8('{Text}Наличные: {ButtonActive} $' .. money_separator(arr['cash'])), 900)
-                                        imgui.FTextCenter(u8('{Text}Деньги в банке: {ButtonActive} $' .. money_separator(arr['bank'])), 900)
-                                        imgui.FTextCenter(u8('{Text}Депозит: {ButtonActive} $' .. money_separator(arr['deposit'])), 900)
-                                        imgui.FTextCenter(u8('{Text}Личный счет: {ButtonActive}' .. (arr['individualAccount'] or 'Отсутствует')), 900)
+                                        imgui.FTextCenter(u8('{Text}Г‚Г±ГҐГЈГ® Г¤ГҐГ­ГҐГЈ: {ButtonActive} $' .. money_separator(arr['totalMoney'])), 900)
+                                        imgui.FTextCenter(u8('{Text}ГЌГ Г«ГЁГ·Г­Г»ГҐ: {ButtonActive} $' .. money_separator(arr['cash'])), 900)
+                                        imgui.FTextCenter(u8('{Text}Г„ГҐГ­ГјГЈГЁ Гў ГЎГ Г­ГЄГҐ: {ButtonActive} $' .. money_separator(arr['bank'])), 900)
+                                        imgui.FTextCenter(u8('{Text}Г„ГҐГЇГ®Г§ГЁГІ: {ButtonActive} $' .. money_separator(arr['deposit'])), 900)
+                                        imgui.FTextCenter(u8('{Text}Г‹ГЁГ·Г­Г»Г© Г±Г·ГҐГІ: {ButtonActive}' .. (arr['individualAccount'] or 'ГЋГІГ±ГіГІГ±ГІГўГіГҐГІ')), 900)
                                     imgui.EndGroup()
                                     imgui.NewLine()
-                                    imgui.FTextCenter(u8('{Text}Работа: {ButtonActive}' .. arr['jobLabel']))
-                                    imgui.FTextCenter(u8('{Text}Организация: {ButtonActive}' .. arr['orgLabel']))
-                                    imgui.FTextCenter(u8('{Text}Должность: {ButtonActive}' .. (arr['rankLabel'] or 'Отсутствует')))
+                                    imgui.FTextCenter(u8('{Text}ГђГ ГЎГ®ГІГ : {ButtonActive}' .. arr['jobLabel']))
+                                    imgui.FTextCenter(u8('{Text}ГЋГ°ГЈГ Г­ГЁГ§Г Г¶ГЁГї: {ButtonActive}' .. arr['orgLabel']))
+                                    imgui.FTextCenter(u8('{Text}Г„Г®Г«Г¦Г­Г®Г±ГІГј: {ButtonActive}' .. (arr['rankLabel'] or 'ГЋГІГ±ГіГІГ±ГІГўГіГҐГІ')))
                                 elseif method['page'] == 2 then
                                     imgui.PushFont(fonts[20])
                                         if menu['graph']['name'] then
                                             imgui.SetCursorPosY((imgui.GetWindowHeight() - 260) / 2)
-                                            imgui.FTextCenter(u8(('{Text}Имя {ButtonActive}%s{Text} %sявляется РП.'):format(menu['information']['name']['value'], menu['information']['name']['rp'] and '' or 'не ')), imgui.GetWindowWidth() * 0.5)
+                                            imgui.FTextCenter(u8(('{Text}Г€Г¬Гї {ButtonActive}%s{Text} %sГїГўГ«ГїГҐГІГ±Гї ГђГЏ.'):format(menu['information']['name']['value'], menu['information']['name']['rp'] and '' or 'Г­ГҐ ')), imgui.GetWindowWidth() * 0.5)
                                             imgui.SetCursorPosX((imgui.GetWindowWidth() / 2 - 266) / 2)
                                             local p = imgui.GetCursorScreenPos(); imgui.GetWindowDrawList():AddImageRounded(menu['graph']['name'], p, imgui.ImVec2(p.x + 266, p.y + 200), imgui.ImVec2(0, 0), imgui.ImVec2(1, 1), 0xFFFFFFFF, 3)
                                         else
                                             imgui.SetCursorPosY((imgui.GetWindowHeight() - 20) / 2)
-                                            imgui.FTextCenter(u8(('{Text}Имя {ButtonActive}%s{Text} %sявляется РП.'):format(menu['information']['name']['value'], menu['information']['name']['rp'] and '' or 'не ')), imgui.GetWindowWidth() * 0.5)
+                                            imgui.FTextCenter(u8(('{Text}Г€Г¬Гї {ButtonActive}%s{Text} %sГїГўГ«ГїГҐГІГ±Гї ГђГЏ.'):format(menu['information']['name']['value'], menu['information']['name']['rp'] and '' or 'Г­ГҐ ')), imgui.GetWindowWidth() * 0.5)
                                         end
 
                                         if menu['graph']['surname'] then
                                             imgui.SetCursorPosY((imgui.GetWindowHeight() - 260) / 2)
-                                            imgui.FTextCenter(u8(('{Text}Фамилия {ButtonActive}%s{Text} %sявляется РП.'):format(menu['information']['surname']['value'], menu['information']['surname']['rp'] and '' or 'не ')), imgui.GetWindowWidth() * 1.5)
+                                            imgui.FTextCenter(u8(('{Text}Г”Г Г¬ГЁГ«ГЁГї {ButtonActive}%s{Text} %sГїГўГ«ГїГҐГІГ±Гї ГђГЏ.'):format(menu['information']['surname']['value'], menu['information']['surname']['rp'] and '' or 'Г­ГҐ ')), imgui.GetWindowWidth() * 1.5)
                                             imgui.SetCursorPosX((imgui.GetWindowWidth() * 1.5 - 266) / 2)
                                             local p = imgui.GetCursorScreenPos(); imgui.GetWindowDrawList():AddImageRounded(menu['graph']['surname'], p, imgui.ImVec2(p.x + 266, p.y + 200), imgui.ImVec2(0, 0), imgui.ImVec2(1, 1), 0xFFFFFFFF, 3)
                                         else
                                             imgui.SetCursorPosY((imgui.GetWindowHeight() - 20) / 2)
-                                            imgui.FTextCenter(u8(('{Text}Фамилия {ButtonActive}%s{Text} %sявляется РП.'):format(menu['information']['surname']['value'], menu['information']['surname']['rp'] and '' or 'не ')), imgui.GetWindowWidth() * 1.5)
+                                            imgui.FTextCenter(u8(('{Text}Г”Г Г¬ГЁГ«ГЁГї {ButtonActive}%s{Text} %sГїГўГ«ГїГҐГІГ±Гї ГђГЏ.'):format(menu['information']['surname']['value'], menu['information']['surname']['rp'] and '' or 'Г­ГҐ ')), imgui.GetWindowWidth() * 1.5)
                                         end
                                     imgui.PopFont()
                                 end
                             
                             imgui.SetCursorPos(imgui.ImVec2((imgui.GetWindowWidth() - 300) / 2, imgui.GetWindowHeight() - 60))
-                            if imgui.CustomButton(u8('Вернуться назад'), imgui.ImVec2(300)) then menu['information'] = {} end
+                            if imgui.CustomButton(u8('Г‚ГҐГ°Г­ГіГІГјГ±Гї Г­Г Г§Г Г¤'), imgui.ImVec2(300)) then menu['information'] = {} end
                         imgui.PopFont()
                     elseif menu['loading']['bool'] or #server['list'] == 0 then
                         if #server['list'] == 0 then
@@ -220,10 +220,10 @@ local newFrame = imgui.OnFrame(
                             imgui.SetCursorPosX((imgui.GetWindowWidth() - 110) / 2)
                             imgui.loadingAnimation('Loading', 35, imgui.ImVec2(10, 30))
 
-                            imgui.FTextCenter(u8('Загрузка списка серверов...'))
+                            imgui.FTextCenter(u8('Г‡Г ГЈГ°ГіГ§ГЄГ  Г±ГЇГЁГ±ГЄГ  Г±ГҐГ°ГўГҐГ°Г®Гў...'))
 
                             imgui.SetCursorPosX((imgui.GetWindowWidth() - 350) / 2)
-                            if imgui.CustomButton(u8('Повторить попытку'), imgui.ImVec2(350)) then getServerList() end
+                            if imgui.CustomButton(u8('ГЏГ®ГўГІГ®Г°ГЁГІГј ГЇГ®ГЇГ»ГІГЄГі'), imgui.ImVec2(350)) then getServerList() end
                         else
                             imgui.SetCursorPos(imgui.ImVec2((imgui.GetWindowWidth() - 110) / 2, (imgui.GetWindowHeight() - 110) / 2))
                             imgui.loadingAnimation('Loading', 35, imgui.ImVec2(10, 30))
@@ -236,19 +236,19 @@ local newFrame = imgui.OnFrame(
                                 imgui.GetWindowDrawList():AddImageRounded(menu['captcha'], p, imgui.ImVec2(p.x + 400, p.y + 200), imgui.ImVec2(0, 0), imgui.ImVec2(1, 1), 0xFFFFFFFF, 3)
                             imgui.EndChild()
 
-                            imgui.PushItemWidth(197.5); imgui.InputTextWithHint('##captcha', u8('Введите капчу'), method['captchaInput'], ffi.sizeof(method['captchaInput'])); imgui.PopItemWidth()
+                            imgui.PushItemWidth(197.5); imgui.InputTextWithHint('##captcha', u8('Г‚ГўГҐГ¤ГЁГІГҐ ГЄГ ГЇГ·Гі'), method['captchaInput'], ffi.sizeof(method['captchaInput'])); imgui.PopItemWidth()
 
                             imgui.SameLine()
 
-                            if imgui.CustomButton(u8('Подтвердить'), imgui.ImVec2(197.5)) then
+                            if imgui.CustomButton(u8('ГЏГ®Г¤ГІГўГҐГ°Г¤ГЁГІГј'), imgui.ImVec2(197.5)) then
                                 getPlayerInformation(u8:decode(ffi.string(method['searchNick'])), server['selected'][0] + 1, u8:decode(ffi.string(method['captchaInput'])))
-                                log('Капча введена: ' .. u8:decode(ffi.string(method['captchaInput'])))
+                                log('ГЉГ ГЇГ·Г  ГўГўГҐГ¤ГҐГ­Г : ' .. u8:decode(ffi.string(method['captchaInput'])))
                                 menu['loading']['bool'], menu['captcha'] = true, nil
                                 imgui.StrCopy(method['captchaInput'], '')
                             end
 
-                            if imgui.CustomButton(u8('Назад'), imgui.ImVec2(400)) then
-                                log('Ввод капчи отменён!')
+                            if imgui.CustomButton(u8('ГЌГ Г§Г Г¤'), imgui.ImVec2(400)) then
+                                log('Г‚ГўГ®Г¤ ГЄГ ГЇГ·ГЁ Г®ГІГ¬ГҐГ­ВёГ­!')
                                 menu['captcha'] = nil
                             end
                         imgui.EndGroup()
@@ -256,9 +256,9 @@ local newFrame = imgui.OnFrame(
                         if method['page'] == 1 then
                             imgui.SetCursorPos(imgui.ImVec2((imgui.GetWindowWidth() - 300) / 2, (imgui.GetWindowHeight() - 185) / 2))
                             imgui.BeginGroup()
-                                imgui.BetterInput('page1', u8('Поиск игрока'), 0, method['searchNick'], imgui.ImVec4(0.26, 0.59, 0.98, 1.00), imgui.ImVec4(0.00, 0.00, 0.00, 1.00), 300, imgui.ImVec4(0.5, 0.5, 0.5, 1.00))
+                                imgui.BetterInput('page1', u8('ГЏГ®ГЁГ±ГЄ ГЁГЈГ°Г®ГЄГ '), 0, method['searchNick'], imgui.ImVec4(0.26, 0.59, 0.98, 1.00), imgui.ImVec4(0.00, 0.00, 0.00, 1.00), 300, imgui.ImVec4(0.5, 0.5, 0.5, 1.00))
                                 imgui.PushItemWidth(300); imgui.Combo('##combo', server['selected'], imgui.new['const char*'][#server['list']](server['list']), #server['list']); imgui.PopItemWidth()
-                                if imgui.CustomButton(u8('Найти'), imgui.ImVec2(300, 40)) and #u8:decode(ffi.string(method['searchNick'])) >= 3 then
+                                if imgui.CustomButton(u8('ГЌГ Г©ГІГЁ'), imgui.ImVec2(300, 40)) and #u8:decode(ffi.string(method['searchNick'])) >= 3 then
                                     menu['loading']['bool'] = true
                                     getPlayerInformation(u8:decode(ffi.string(method['searchNick'])), server['selected'][0] + 1)
                                 end
@@ -266,8 +266,8 @@ local newFrame = imgui.OnFrame(
                         elseif method['page'] == 2 then
                             imgui.SetCursorPos(imgui.ImVec2((imgui.GetWindowWidth() - 300) / 2, (imgui.GetWindowHeight() - 140) / 2))
                             imgui.BeginGroup()
-                                imgui.BetterInput('page2', u8('Поиск имени'), 0, method['searchNick'], imgui.ImVec4(0.26, 0.59, 0.98, 1.00), imgui.ImVec4(0.00, 0.00, 0.00, 1.00), 300, imgui.ImVec4(0.5, 0.5, 0.5, 1.00))
-                                if imgui.CustomButton(u8('Найти'), imgui.ImVec2(300, 40)) and #u8:decode(ffi.string(method['searchNick'])) >= 1 then
+                                imgui.BetterInput('page2', u8('ГЏГ®ГЁГ±ГЄ ГЁГ¬ГҐГ­ГЁ'), 0, method['searchNick'], imgui.ImVec4(0.26, 0.59, 0.98, 1.00), imgui.ImVec4(0.00, 0.00, 0.00, 1.00), 300, imgui.ImVec4(0.5, 0.5, 0.5, 1.00))
+                                if imgui.CustomButton(u8('ГЌГ Г©ГІГЁ'), imgui.ImVec2(300, 40)) and #u8:decode(ffi.string(method['searchNick'])) >= 1 then
                                     menu['loading']['bool'] = true
                                     getRolePlayNick(u8:decode(ffi.string(method['searchNick'])))
                                 end
@@ -283,31 +283,31 @@ local newFrame = imgui.OnFrame(
                         imgui.SetCursorPos(imgui.ImVec2(465, 5))
                         if imgui.CustomButton(faicons('LIST'), imgui.ImVec2(40, 35), true) then menu['page'] = 3 end
                     end
-                elseif menu['page'] == 2 then -->> Настройки
+                elseif menu['page'] == 2 then -->> ГЌГ Г±ГІГ°Г®Г©ГЄГЁ
                     imgui.SetCursorPos(imgui.ImVec2((imgui.GetWindowWidth() - 550) / 2, (imgui.GetWindowHeight() - 130) / 2))
                     imgui.BeginChild('hotkey', imgui.ImVec2(550, 140), false)
                         imgui.Hotkey('##informationKey', 'informationKey', imgui.ImVec2(235))
-                        imgui.SameLine((240 + 550 - imgui.CalcTextSize(u8('Информация о игроке')).x) / 2)
-                        imgui.Text(u8('Информация о игроке'))
+                        imgui.SameLine((240 + 550 - imgui.CalcTextSize(u8('Г€Г­ГґГ®Г°Г¬Г Г¶ГЁГї Г® ГЁГЈГ°Г®ГЄГҐ')).x) / 2)
+                        imgui.Text(u8('Г€Г­ГґГ®Г°Г¬Г Г¶ГЁГї Г® ГЁГЈГ°Г®ГЄГҐ'))
 
                         imgui.Hotkey('##checkrp', 'checkrp', imgui.ImVec2(235))
-                        imgui.SameLine((240 + 550 - imgui.CalcTextSize(u8('Проверка РП ника')).x) / 2)
-                        imgui.Text(u8('Проверка РП ника'))
+                        imgui.SameLine((240 + 550 - imgui.CalcTextSize(u8('ГЏГ°Г®ГўГҐГ°ГЄГ  ГђГЏ Г­ГЁГЄГ ')).x) / 2)
+                        imgui.Text(u8('ГЏГ°Г®ГўГҐГ°ГЄГ  ГђГЏ Г­ГЁГЄГ '))
 
-                        if imgui.CustomButton(u8('Вернуться назад'), imgui.ImVec2(-1)) then menu['page'] = 1 end
+                        if imgui.CustomButton(u8('Г‚ГҐГ°Г­ГіГІГјГ±Гї Г­Г Г§Г Г¤'), imgui.ImVec2(-1)) then menu['page'] = 1 end
                     imgui.EndChild()
-                elseif menu['page'] == 3 then -->> Выбор методов
+                elseif menu['page'] == 3 then -->> Г‚Г»ГЎГ®Г° Г¬ГҐГІГ®Г¤Г®Гў
                     imgui.SetCursorPos(imgui.ImVec2((imgui.GetWindowWidth() - 350) / 2, (imgui.GetWindowHeight() - 130) / 2))
                     imgui.BeginGroup()
-                        if imgui.ButtonSelected(u8('Информация о игроке'), imgui.ImVec2(350, 40), 1) then method['page'] = 1 end
-                        if imgui.ButtonSelected(u8('Проверка РП ника'), imgui.ImVec2(350, 40), 2) then method['page'] = 2 end
-                        if imgui.Button(u8('Вернуться назад'), imgui.ImVec2(350)) then menu['page'] = 1 end
+                        if imgui.ButtonSelected(u8('Г€Г­ГґГ®Г°Г¬Г Г¶ГЁГї Г® ГЁГЈГ°Г®ГЄГҐ'), imgui.ImVec2(350, 40), 1) then method['page'] = 1 end
+                        if imgui.ButtonSelected(u8('ГЏГ°Г®ГўГҐГ°ГЄГ  ГђГЏ Г­ГЁГЄГ '), imgui.ImVec2(350, 40), 2) then method['page'] = 2 end
+                        if imgui.Button(u8('Г‚ГҐГ°Г­ГіГІГјГ±Гї Г­Г Г§Г Г¤'), imgui.ImVec2(350)) then menu['page'] = 1 end
                     imgui.EndGroup()
                 end
 
                 imgui.PushFont(fonts[20])
-                    imgui.SetCursorPos(imgui.ImVec2((imgui.GetWindowWidth() - imgui.CalcTextSize(u8('веселый прикол | https://vk.com/vprikolbot')).x) / 2, imgui.GetWindowHeight() - 25))
-                    imgui.TextColored(imgui.ImVec4(0, 0, 0, 0.7), u8('веселый прикол | https://vk.com/vprikolbot'))
+                    imgui.SetCursorPos(imgui.ImVec2((imgui.GetWindowWidth() - imgui.CalcTextSize(u8('ГўГҐГ±ГҐГ«Г»Г© ГЇГ°ГЁГЄГ®Г« | https://vk.com/vprikolbot')).x) / 2, imgui.GetWindowHeight() - 25))
+                    imgui.TextColored(imgui.ImVec4(0, 0, 0, 0.7), u8('ГўГҐГ±ГҐГ«Г»Г© ГЇГ°ГЁГЄГ®Г« | https://vk.com/vprikolbot'))
                 imgui.PopFont()
             imgui.PopFont()
         imgui.End()
@@ -322,16 +322,16 @@ local updateFrame = imgui.OnFrame(
         imgui.Begin('Update', _, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse + imgui.WindowFlags.NoTitleBar)
             imgui.PushFont(fonts[30])
                 if update['data']['version'] then
-                    imgui.Text(u8('Доступно обновление!'))
+                    imgui.Text(u8('Г„Г®Г±ГІГіГЇГ­Г® Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ!'))
                     imgui.PushFont(fonts[20])
-                        imgui.FText(u8('{TextDisabled}Текущая версия: #' .. thisScript().version))
-                        imgui.FText(u8( ('{TextDisabled}Актуальная версия: #%s %s'):format(update['data']['version']['v'], update['data']['update']['mandatory'] and '{DragDropTarget}[Обязательное]' or '') ))
+                        imgui.FText(u8('{TextDisabled}Г’ГҐГЄГіГ№Г Гї ГўГҐГ°Г±ГЁГї: #' .. thisScript().version))
+                        imgui.FText(u8( ('{TextDisabled}ГЂГЄГІГіГ Г«ГјГ­Г Гї ГўГҐГ°Г±ГЁГї: #%s %s'):format(update['data']['version']['v'], update['data']['update']['mandatory'] and '{DragDropTarget}[ГЋГЎГїГ§Г ГІГҐГ«ГјГ­Г®ГҐ]' or '') ))
 
                     imgui.PopFont()
 
                     imgui.NewLine()
 
-                    imgui.Text(u8('Список изменений:'))
+                    imgui.Text(u8('Г‘ГЇГЁГ±Г®ГЄ ГЁГ§Г¬ГҐГ­ГҐГ­ГЁГ©:'))
                     imgui.BeginChild('updateList', imgui.ImVec2(-1, -45), false)
                         for k, v in ipairs(update['data']['update']['text']) do
                             imgui.PushFont(fonts[20]); imgui.FText(('{ButtonActive}%s) {Text}%s'):format(k, u8(v))); imgui.PopFont()
@@ -339,22 +339,22 @@ local updateFrame = imgui.OnFrame(
                     imgui.EndChild()
 
                     if not update['data']['update']['mandatory'] then
-                        if imgui.CustomButton(u8('Установить'), imgui.ImVec2(200)) then downloadUpdate() end
+                        if imgui.CustomButton(u8('Г“Г±ГІГ Г­Г®ГўГЁГІГј'), imgui.ImVec2(200)) then downloadUpdate() end
                         imgui.SameLine(495)
-                        if imgui.CustomButton(u8('Отмена'), imgui.ImVec2(200)) then update['check'] = true end
+                        if imgui.CustomButton(u8('ГЋГІГ¬ГҐГ­Г '), imgui.ImVec2(200)) then update['check'] = true end
                     else
                         imgui.SetCursorPosX((imgui.GetWindowWidth() - 200) / 2)
-                        if imgui.CustomButton(u8('Установить'), imgui.ImVec2(200)) then downloadUpdate() end
+                        if imgui.CustomButton(u8('Г“Г±ГІГ Г­Г®ГўГЁГІГј'), imgui.ImVec2(200)) then downloadUpdate() end
                     end
                 else
                     imgui.SetCursorPosY((imgui.GetWindowHeight() - 195) / 2)
                     imgui.SetCursorPosX((imgui.GetWindowWidth() - 110) / 2)
                     imgui.loadingAnimation('Loading', 35, imgui.ImVec2(10, 30))
 
-                    imgui.FTextCenter(u8('Проверка наличия обновлений...'))
+                    imgui.FTextCenter(u8('ГЏГ°Г®ГўГҐГ°ГЄГ  Г­Г Г«ГЁГ·ГЁГї Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГ©...'))
 
                     imgui.SetCursorPosX((imgui.GetWindowWidth() - 300) / 2)
-                    if imgui.CustomButton(u8('Повторить попытку'), imgui.ImVec2(300)) then getScriptUpdate() end
+                    if imgui.CustomButton(u8('ГЏГ®ГўГІГ®Г°ГЁГІГј ГЇГ®ГЇГ»ГІГЄГі'), imgui.ImVec2(300)) then getScriptUpdate() end
                 end
             imgui.PopFont()
         imgui.End()
@@ -363,7 +363,7 @@ local updateFrame = imgui.OnFrame(
 
 function onScriptTerminate(scr, quitGame) 
     if scr == thisScript() then
-        log('Скрипт завершил работу. Причина: ' .. (quitGame and 'Выход из игры' or 'Сценарий завершен'))
+        log('Г‘ГЄГ°ГЁГЇГІ Г§Г ГўГҐГ°ГёГЁГ« Г°Г ГЎГ®ГІГі. ГЏГ°ГЁГ·ГЁГ­Г : ' .. (quitGame and 'Г‚Г»ГµГ®Г¤ ГЁГ§ ГЁГЈГ°Г»' or 'Г‘Г¶ГҐГ­Г Г°ГЁГ© Г§Г ГўГҐГ°ГёГҐГ­'))
     end
 end
 
@@ -547,13 +547,13 @@ function imgui.Hotkey(label, keys, size)
 
     -- local result = {bool = false, keys = {}}
     local result = false
-    local name = UI_HOTKEY[label] and (os.time() % 2 == 0 and u8('Нажмите клавишу') or '') or (settings['hotkey'][keys] ~= -1 and vkeys.id_to_name(settings['hotkey'][keys]) or u8('Свободно'))
+    local name = UI_HOTKEY[label] and (os.time() % 2 == 0 and u8('ГЌГ Г¦Г¬ГЁГІГҐ ГЄГ«Г ГўГЁГёГі') or '') or (settings['hotkey'][keys] ~= -1 and vkeys.id_to_name(settings['hotkey'][keys]) or u8('Г‘ГўГ®ГЎГ®Г¤Г­Г®'))
 
     if UI_HOTKEY[label] then
         if imgui.IsKeyDown(8) then
             -- result = {bool = true, keys = {old = settings['hotkey'][keys], new = -1}}
             settings['hotkey'][keys] = -1
-            sms('Вы сбросили клавишу!')
+            sms('Г‚Г» Г±ГЎГ°Г®Г±ГЁГ«ГЁ ГЄГ«Г ГўГЁГёГі!')
             UI_HOTKEY[label] = false
             json():save(settings) 
         else
@@ -561,7 +561,7 @@ function imgui.Hotkey(label, keys, size)
                 if imgui.IsKeyDown(k) then
                     -- result = {bool = true, keys = {old = settings['hotkey'][keys], new = k}}
                     settings['hotkey'][keys] = k
-                    sms('Вы установили клавишу!')
+                    sms('Г‚Г» ГіГ±ГІГ Г­Г®ГўГЁГ«ГЁ ГЄГ«Г ГўГЁГёГі!')
                     UI_HOTKEY[label] = false
                     json():save(settings) 
                 end
@@ -583,7 +583,7 @@ end
 
 function sms(text)
     local text = tostring(text):gsub('{mc}', '{e89f64}'):gsub('{%-1}', '{FFFFFF}')
-    sampAddChatMessage('VPrikol » {FFFFFF}' .. text, 0xe89f64)
+    sampAddChatMessage('VPrikol В» {FFFFFF}' .. text, 0xe89f64)
 end
 
 function money_separator(n)
@@ -611,10 +611,10 @@ function asyncHttpRequest(method, url, args, resolve, reject)
          return false, response
       end
    end)(method, url, encodeJson(args))
-   -- Если запрос без функций обработки ответа и ошибок.
+   -- Г…Г±Г«ГЁ Г§Г ГЇГ°Г®Г± ГЎГҐГ§ ГґГіГ­ГЄГ¶ГЁГ© Г®ГЎГ°Г ГЎГ®ГІГЄГЁ Г®ГІГўГҐГІГ  ГЁ Г®ГёГЁГЎГ®ГЄ.
    if not resolve then resolve = function() end end
    if not reject then reject = function() end end
-   -- Проверка выполнения потока
+   -- ГЏГ°Г®ГўГҐГ°ГЄГ  ГўГ»ГЇГ®Г«Г­ГҐГ­ГЁГї ГЇГ®ГІГ®ГЄГ 
    lua_thread.create(function()
       local runner = request_thread
       while true do
@@ -640,14 +640,14 @@ function asyncHttpRequest(method, url, args, resolve, reject)
 end
 
 function getPlayerInformation(nick, currentServer, captcha)
-    log('getPlayerInformation: ' .. ('%s | Сервер: %s [%s] | Капча: %s'):format(nick, server['list'][currentServer], currentServer, tostring(captcha)))
+    log('getPlayerInformation: ' .. ('%s | Г‘ГҐГ°ГўГҐГ°: %s [%s] | ГЉГ ГЇГ·Г : %s'):format(nick, server['list'][currentServer], currentServer, tostring(captcha)))
 
     local params = {
         ['params'] = {
             ['nick'] = nick,
             ['server'] = currentServer,
             ['captcha'] = captcha or '',
-            ['preview'] = 'success'
+            ['preview'] = 'disable'
         }
     }
 
@@ -657,18 +657,18 @@ function getPlayerInformation(nick, currentServer, captcha)
             if response.status_code == 200 then
                 log('getPlayerInformation: status_code 200')
                 if decodeJson(response.text)['status'] == 'captcha' then
-                    log('getPlayerInformation: Пришла капча')
+                    log('getPlayerInformation: ГЏГ°ГЁГёГ«Г  ГЄГ ГЇГ·Г ')
                     local path_download = getWorkingDirectory() .. '/vprikol/captcha.png'
                     local url = decodeJson(response.text)['image']
                     downloadUrlToFile(url, path_download, function(id, status, p1, p2)
                         if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-                            log('getPlayerInformation: Скачал капчу')
+                            log('getPlayerInformation: Г‘ГЄГ Г·Г Г« ГЄГ ГЇГ·Гі')
                             menu['captcha'] = imgui.CreateTextureFromFile(path_download)
                             menu['loading']['bool'] = false
                         end
                     end)
                 elseif decodeJson(response.text)['status'] == 'success' then
-                    log('getPlayerInformation: Пришла информация')
+                    log('getPlayerInformation: ГЏГ°ГЁГёГ«Г  ГЁГ­ГґГ®Г°Г¬Г Г¶ГЁГї')
                     menu['information'] = decodeJson(u8:decode(response.text))
                     menu['loading']['bool'] = false
                 end
@@ -680,7 +680,7 @@ function getPlayerInformation(nick, currentServer, captcha)
         end,
         function(err)
             log('getPlayerInformation: Error' .. tostring(err):match('requests%.lua:%d+: (.+)'))
-            sms('Произошла ошибка: {mc}' .. tostring(err):match('requests%.lua:%d+: (.+)'))
+            sms('ГЏГ°Г®ГЁГ§Г®ГёГ«Г  Г®ГёГЁГЎГЄГ : {mc}' .. tostring(err):match('requests%.lua:%d+: (.+)'))
             menu['loading']['bool'] = false
         end) 
 end
@@ -707,7 +707,7 @@ function getRolePlayNick(nick)
         end,
         function(err)
             log('getRolePlayNick: Error' .. tostring(err):match('requests%.lua:%d+: (.+)'))
-            sms('Произошла ошибка: {mc}' .. tostring(err):match('requests%.lua:%d+: (.+)'))
+            sms('ГЏГ°Г®ГЁГ§Г®ГёГ«Г  Г®ГёГЁГЎГЄГ : {mc}' .. tostring(err):match('requests%.lua:%d+: (.+)'))
             menu['loading']['bool'] = false
         end) 
 end
@@ -724,14 +724,14 @@ function downloadImage(data, resolve)
         if v[2] then
             downloadUrlToFile(v[2], path, function(id, status, p1, p2)
                 if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-                    log('downloadImage: ' .. v[1] .. ' Скачал картинку')
+                    log('downloadImage: ' .. v[1] .. ' Г‘ГЄГ Г·Г Г« ГЄГ Г°ГІГЁГ­ГЄГі')
                     menu['graph'][v[1]] = imgui.CreateTextureFromFile(path)
                     countDownload = countDownload + 1
                     if countDownload == 2 then resolve() end
                 end
             end)
         else
-            log('downloadImage: ' .. v[1] .. ' Картинка не нужна')
+            log('downloadImage: ' .. v[1] .. ' ГЉГ Г°ГІГЁГ­ГЄГ  Г­ГҐ Г­ГіГ¦Г­Г ')
             menu['graph'][v[1]] = nil
             countDownload = countDownload + 1
             if countDownload == 2 then resolve() end
@@ -749,7 +749,7 @@ function getServerList()
                     server['list'][v.number] = v.name
                     server['ip'][v.ip] = v.number
                 end
-                log('Список серверов загружен. Количество: ' .. #server['list'])
+                log('Г‘ГЇГЁГ±Г®ГЄ Г±ГҐГ°ГўГҐГ°Г®Гў Г§Г ГЈГ°ГіГ¦ГҐГ­. ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ®: ' .. #server['list'])
             end
         end
     end)
@@ -764,9 +764,9 @@ function getScriptUpdate()
                 local t = decodeJson(u8:decode(file:read('all')))
                 if t then
                     update['data'] = t
-                    log('Список обновлений загружен!')
-                    log('Версия скрипта: ' .. thisScript().version)
-                    log('Последняя версия: ' .. update['data']['version']['v'])
+                    log('Г‘ГЇГЁГ±Г®ГЄ Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГ© Г§Г ГЈГ°ГіГ¦ГҐГ­!')
+                    log('Г‚ГҐГ°Г±ГЁГї Г±ГЄГ°ГЁГЇГІГ : ' .. thisScript().version)
+                    log('ГЏГ®Г±Г«ГҐГ¤Г­ГїГї ГўГҐГ°Г±ГЁГї: ' .. update['data']['version']['v'])
                     if update['data']['version']['v'] == thisScript().version then update['check'] = true end
                 end
             end
@@ -777,7 +777,7 @@ end
 function downloadUpdate()
     downloadUrlToFile(update['data']['version']['url'], thisScript().path, function(id, status, p1, p2)
         if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-            log('Загрузил обновление!')
+            log('Г‡Г ГЈГ°ГіГ§ГЁГ« Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ!')
             lua_thread.create(function() wait(500) thisScript():reload() end)
         end
     end)
