@@ -1,13 +1,13 @@
 {
     "version": {
-        "v": "1.0.2", 
+        "v": "1.1",
         "url": "https://raw.githubusercontent.com/evans-dev1/vprikol-lua/main/vprikol.lua"
     },
     "update": {
-        "title": "Beta release 1.0.2",
+        "title": "Beta release 1.1",
         "mandatory": true,
         "text": [
-            "Добавлен поиск игроков: /get"
+            "Добавлена возможность закрывать окна загрузки"
         ]
     }
 }

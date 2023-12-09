@@ -1,5 +1,5 @@
 script_name('VPrikol')
-script_version('1.0.2')
+script_version('1.1')
 
 local imgui = require('mimgui')
 local ffi = require('ffi')
@@ -156,6 +156,7 @@ end)
 local newFrame = imgui.OnFrame(
 	function() return window[0] and update['check'] and not isPauseMenuActive() and not sampIsScoreboardOpen() end,
 	function(player)
+        player.HideCursor = imgui.IsMouseDown(1)
         imgui.SetNextWindowPos(imgui.ImVec2(select(1, getScreenResolution()) / 2, select(2, getScreenResolution()) / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
         imgui.SetNextWindowSize(imgui.ImVec2(600, 350), imgui.Cond.FirstUseEver)
         imgui.Begin('Frame', window, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse + imgui.WindowFlags.NoTitleBar)
@@ -309,6 +310,11 @@ local newFrame = imgui.OnFrame(
                     imgui.SetCursorPos(imgui.ImVec2((imgui.GetWindowWidth() - imgui.CalcTextSize(u8('веселый прикол | https://vk.com/vprikolbot')).x) / 2, imgui.GetWindowHeight() - 25))
                     imgui.TextColored(imgui.ImVec4(0, 0, 0, 0.7), u8('веселый прикол | https://vk.com/vprikolbot'))
                 imgui.PopFont()
+
+                if menu['loading']['bool'] then
+                    imgui.SetCursorPos(imgui.ImVec2(555, 5))
+                    if imgui.CustomButton(faicons('XMARK'), imgui.ImVec2(39, 35), true) then window[0] = false end
+                end
             imgui.PopFont()
         imgui.End()
     end
@@ -317,6 +323,7 @@ local newFrame = imgui.OnFrame(
 local updateFrame = imgui.OnFrame(
 	function() return not update['check'] and not isPauseMenuActive() and not sampIsScoreboardOpen() end,
 	function(player)
+        player.HideCursor = imgui.IsMouseDown(1)
         imgui.SetNextWindowPos(imgui.ImVec2(select(1, getScreenResolution()) / 2, select(2, getScreenResolution()) / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
         imgui.SetNextWindowSize(imgui.ImVec2(700, 350), imgui.Cond.FirstUseEver)
         imgui.Begin('Update', _, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse + imgui.WindowFlags.NoTitleBar)
@@ -355,6 +362,9 @@ local updateFrame = imgui.OnFrame(
 
                     imgui.SetCursorPosX((imgui.GetWindowWidth() - 300) / 2)
                     if imgui.CustomButton(u8('Повторить попытку'), imgui.ImVec2(300)) then getScriptUpdate() end
+
+                    imgui.SetCursorPos(imgui.ImVec2(656, 5))
+                    if imgui.CustomButton(faicons('XMARK'), imgui.ImVec2(39, 35), true) then update['check'] = true end
                 end
             imgui.PopFont()
         imgui.End()
@@ -669,6 +679,7 @@ function getPlayerInformation(nick, currentServer, captcha)
                     end)
                 elseif decodeJson(response.text)['status'] == 'success' then
                     log('getPlayerInformation: Пришла информация')
+                    print(u8:decode(response.text))
                     menu['information'] = decodeJson(u8:decode(response.text))
                     menu['loading']['bool'] = false
                 end
