@@ -1,13 +1,14 @@
 {
     "version": {
-        "v": "1.1",
+        "v": "1.2",
         "url": "https://raw.githubusercontent.com/evans-dev1/vprikol-lua/main/vprikol.lua"
     },
     "update": {
-        "title": "Beta release 1.1",
+        "title": "Beta release 1.2",
         "mandatory": true,
         "text": [
-            "Добавлена возможность закрывать окна загрузки"
+            "Добавлено отображение ранга в команде /get",
+            "Иные важные внутренние изменения"
         ]
     }
 }
