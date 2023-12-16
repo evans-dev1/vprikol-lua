@@ -1,14 +1,13 @@
 {
     "version": {
-        "v": "1.2",
+        "v": "1.2.1",
         "url": "https://raw.githubusercontent.com/evans-dev1/vprikol-lua/main/vprikol.lua"
     },
     "update": {
-        "title": "Beta release 1.2",
+        "title": "Beta release 1.2.1",
         "mandatory": true,
         "text": [
-            "Добавлено отображение ранга в команде /get",
-            "Иные важные внутренние изменения"
+            "Поддержка упрощенного финда",
         ]
     }
 }
