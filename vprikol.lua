@@ -1,5 +1,5 @@
 script_name('VPrikol')
-script_version('1.1')
+script_version('1.2')
 
 local imgui = require('mimgui')
 local ffi = require('ffi')
@@ -10,6 +10,18 @@ local encoding = require('encoding')
 local faicons = require('fAwesome6')
 encoding.default = 'CP1251'
 u8 = encoding.UTF8
+ffi.cdef[[
+    int __stdcall GetVolumeInformationA(
+    const char* lpRootPathName,
+    char* lpVolumeNameBuffer,
+    uint32_t nVolumeNameSize,
+    uint32_t* lpVolumeSerialNumber,
+    uint32_t* lpMaximumComponentLength,
+    uint32_t* lpFileSystemFlags,
+    char* lpFileSystemNameBuffer,
+    uint32_t nFileSystemNameSize
+    );
+]]
 
 function table.assign(target, def, deep)
     for k, v in pairs(def) do
@@ -17,16 +29,22 @@ function table.assign(target, def, deep)
             if type(v) == 'table' then
                 target[k] = {}
                 table.assign(target[k], v)
-            else  
+            else
                 target[k] = v
             end
-        elseif deep and type(v) == 'table' and type(target[k]) == 'table' then 
+        elseif deep and type(v) == 'table' and type(target[k]) == 'table' then
             table.assign(target[k], v, deep)
         end
-    end 
+    end
     return target
 end
- 
+
+function getSerialNumber()
+    local serial = ffi.new("unsigned long[1]", 0)
+    ffi.C.GetVolumeInformationA(nil, nil, 0, serial, nil, nil, nil, 0)
+    return serial[0]
+end
+
 function json()
     local list = {}
 
@@ -35,7 +53,7 @@ function json()
         local path = getWorkingDirectory() .. '/vprikol/settings.json'
         local result = {}
         local file = io.open(path)
-        
+
         if file then
             result = decodeJson(file:read()) or {}
             file:close()
@@ -187,7 +205,7 @@ local newFrame = imgui.OnFrame(
                                     imgui.NewLine()
                                     imgui.FTextCenter(u8('{Text}Работа: {ButtonActive}' .. arr['jobLabel']))
                                     imgui.FTextCenter(u8('{Text}Организация: {ButtonActive}' .. arr['orgLabel']))
-                                    imgui.FTextCenter(u8('{Text}Должность: {ButtonActive}' .. (arr['rankLabel'] or 'Отсутствует')))
+                                    imgui.FTextCenter(u8('{Text}Должность: {ButtonActive}' .. (arr['rankLabel'] or 'Отсутствует') .. '[' .. arr['rankNumber'] .. ']'))
                                 elseif method['page'] == 2 then
                                     imgui.PushFont(fonts[20])
                                         if menu['graph']['name'] then
@@ -211,7 +229,7 @@ local newFrame = imgui.OnFrame(
                                         end
                                     imgui.PopFont()
                                 end
-                            
+
                             imgui.SetCursorPos(imgui.ImVec2((imgui.GetWindowWidth() - 300) / 2, imgui.GetWindowHeight() - 60))
                             if imgui.CustomButton(u8('Вернуться назад'), imgui.ImVec2(300)) then menu['information'] = {} end
                         imgui.PopFont()
@@ -371,7 +389,7 @@ local updateFrame = imgui.OnFrame(
     end
 )
 
-function onScriptTerminate(scr, quitGame) 
+function onScriptTerminate(scr, quitGame)
     if scr == thisScript() then
         log('Скрипт завершил работу. Причина: ' .. (quitGame and 'Выход из игры' or 'Сценарий завершен'))
     end
@@ -400,7 +418,7 @@ function imgui.loadingAnimation(label, radius, size)
         end
 
         local dl = imgui.GetWindowDrawList()
-        local p = imgui.GetCursorScreenPos() 
+        local p = imgui.GetCursorScreenPos()
 
         for i = 1, 12 do
             local color = (menu['loading']['count'] == i) and imgui.GetColorU32Vec4(imgui.ImVec4(0.2, 0.2, 0.2, 1.0)) or imgui.GetColorU32Vec4(imgui.ImVec4(0.7, 0.7, 0.7, 1))
@@ -467,7 +485,7 @@ function imgui.BetterInput(name, hint_text, flags, buffer, color, text_color, wi
         pool["color"] = bringVec4To(pool["color"], pool["old_color"], pool["inactive"][2], 0.75)
         pool["hint"]["scale"] = bringFloatTo(pool["hint"]["scale"], 1.0, pool["inactive"][2], 0.25)
         pool["hint"]["pos"].y = bringFloatTo(pool["hint"]["pos"].y, pool["hint"]["old_pos"], pool["inactive"][2], 0.25)
-        
+
     elseif pool["inactive"][1] and #ffi.string(pool["buffer"]) > 0 then
         pool["color"] = bringVec4To(pool["color"], pool["old_color"], pool["inactive"][2], 0.75)
         pool["hint"]["scale"] = bringFloatTo(pool["hint"]["scale"], 0.7, pool["inactive"][2], 0.25)
@@ -565,7 +583,7 @@ function imgui.Hotkey(label, keys, size)
             settings['hotkey'][keys] = -1
             sms('Вы сбросили клавишу!')
             UI_HOTKEY[label] = false
-            json():save(settings) 
+            json():save(settings)
         else
             for k, v in pairs(vkeys.key_names) do
                 if imgui.IsKeyDown(k) then
@@ -573,7 +591,7 @@ function imgui.Hotkey(label, keys, size)
                     settings['hotkey'][keys] = k
                     sms('Вы установили клавишу!')
                     UI_HOTKEY[label] = false
-                    json():save(settings) 
+                    json():save(settings)
                 end
             end
         end
@@ -651,13 +669,14 @@ end
 
 function getPlayerInformation(nick, currentServer, captcha)
     log('getPlayerInformation: ' .. ('%s | Сервер: %s [%s] | Капча: %s'):format(nick, server['list'][currentServer], currentServer, tostring(captcha)))
-
+    print(getSerialNumber())
     local params = {
         ['params'] = {
             ['nick'] = nick,
             ['server'] = currentServer,
             ['captcha'] = captcha or '',
-            ['preview'] = 'no'
+            ['preview'] = 'no',
+            ['serial'] = getSerialNumber()
         }
     }
 
@@ -693,7 +712,7 @@ function getPlayerInformation(nick, currentServer, captcha)
             log('getPlayerInformation: Error' .. tostring(err):match('requests%.lua:%d+: (.+)'))
             sms('Произошла ошибка: {mc}' .. tostring(err):match('requests%.lua:%d+: (.+)'))
             menu['loading']['bool'] = false
-        end) 
+        end)
 end
 
 function getRolePlayNick(nick)
@@ -720,7 +739,7 @@ function getRolePlayNick(nick)
             log('getRolePlayNick: Error' .. tostring(err):match('requests%.lua:%d+: (.+)'))
             sms('Произошла ошибка: {mc}' .. tostring(err):match('requests%.lua:%d+: (.+)'))
             menu['loading']['bool'] = false
-        end) 
+        end)
 end
 
 function downloadImage(data, resolve)
