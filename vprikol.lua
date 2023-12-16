@@ -205,7 +205,7 @@ local newFrame = imgui.OnFrame(
                                     imgui.NewLine()
                                     imgui.FTextCenter(u8('{Text}Работа: {ButtonActive}' .. arr['jobLabel']))
                                     imgui.FTextCenter(u8('{Text}Организация: {ButtonActive}' .. arr['orgLabel']))
-                                    imgui.FTextCenter(u8('{Text}Должность: {ButtonActive}' .. (arr['rankLabel'] or 'Отсутствует') .. '[' .. arr['rankNumber'] .. ']'))
+                                    imgui.FTextCenter(u8('{Text}Должность: {ButtonActive}' .. (arr['rankLabel'] or 'Отсутствует') .. ' [' .. arr['rankNumber'] .. ']'))
                                 elseif method['page'] == 2 then
                                     imgui.PushFont(fonts[20])
                                         if menu['graph']['name'] then
