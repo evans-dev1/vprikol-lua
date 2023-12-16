@@ -1,5 +1,5 @@
 script_name('VPrikol')
-script_version('1.2')
+script_version('1.2.1')
 
 local imgui = require('mimgui')
 local ffi = require('ffi')
@@ -188,10 +188,10 @@ local newFrame = imgui.OnFrame(
                                     imgui.FTextCenter(u8( ('{Text}Информация о {ButtonActive}%s{Text} на сервере {ButtonActive}%s{Text} [{ButtonActive}%s{Text}]:'):format(menu['information']['nick'], server['list'][menu['information']['server']], menu['information']['server']) ))
                                     imgui.NewLine()
                                     imgui.BeginGroup()
-                                        imgui.FTextCenter(u8('{Text}ID аккаунта: {ButtonActive}' .. arr['accountId']), 300)
-                                        imgui.FTextCenter(u8('{Text}Уровень: {ButtonActive}' .. arr['lvl']), 300)
-                                        imgui.FTextCenter(u8('{Text}Уровень VIP: {ButtonActive}' .. arr['vipLabel']), 300)
-                                        imgui.FTextCenter(u8('{Text}Номер телефона: {ButtonActive}' .. arr['phoneNumber']), 300)
+                                        imgui.FTextCenter(u8('{Text}ID аккаунта: {ButtonActive}' .. (arr['accountId'] or 'Неизвестно')), 300)
+                                        imgui.FTextCenter(u8('{Text}Уровень: {ButtonActive}' .. (arr['lvl'] or 'Неизвестно')), 300)
+                                        imgui.FTextCenter(u8('{Text}Уровень VIP: {ButtonActive}' .. (arr['vipLabel'] or 'Неизвестно')), 300)
+                                        imgui.FTextCenter(u8('{Text}Номер телефона: {ButtonActive}' .. (arr['phoneNumber']) or 'Отсутствует'), 300)
                                         imgui.FTextCenter(u8('{Text}Состояние: {ButtonActive}' .. (arr['isOnline'] and 'Онлайн' or 'Оффлайн')), 300)
                                     imgui.EndGroup()
                                     imgui.SameLine()
@@ -203,8 +203,8 @@ local newFrame = imgui.OnFrame(
                                         imgui.FTextCenter(u8('{Text}Личный счет: {ButtonActive}' .. (arr['individualAccount'] or 'Отсутствует')), 900)
                                     imgui.EndGroup()
                                     imgui.NewLine()
-                                    imgui.FTextCenter(u8('{Text}Работа: {ButtonActive}' .. arr['jobLabel']))
-                                    imgui.FTextCenter(u8('{Text}Организация: {ButtonActive}' .. arr['orgLabel']))
+                                    imgui.FTextCenter(u8('{Text}Работа: {ButtonActive}' .. (arr['jobLabel'] or 'Неизвестно')))
+                                    imgui.FTextCenter(u8('{Text}Организация: {ButtonActive}' .. (arr['orgLabel'] or 'Неизвестно')))
                                     imgui.FTextCenter(u8('{Text}Должность: {ButtonActive}' .. (arr['rankLabel'] or 'Отсутствует') .. ' [' .. arr['rankNumber'] .. ']'))
                                 elseif method['page'] == 2 then
                                     imgui.PushFont(fonts[20])
@@ -615,6 +615,9 @@ function sms(text)
 end
 
 function money_separator(n)
+    if not n then
+        return 'Неизвестно'
+    end
     local left,num,right = string.match(n,'^([^%d]*%d)(%d*)(.-)$')
     return left..(num:reverse():gsub('(%d%d%d)','%1.'):reverse())..right
 end
