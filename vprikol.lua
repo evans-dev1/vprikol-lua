@@ -1,5 +1,5 @@
 script_name('VPrikol')
-script_version('1.2.1')
+script_version('1.2.2')
 
 local imgui = require('mimgui')
 local ffi = require('ffi')
@@ -191,7 +191,7 @@ local newFrame = imgui.OnFrame(
                                         imgui.FTextCenter(u8('{Text}ID аккаунта: {ButtonActive}' .. (arr['accountId'] or 'Неизвестно')), 300)
                                         imgui.FTextCenter(u8('{Text}Уровень: {ButtonActive}' .. (arr['lvl'] or 'Неизвестно')), 300)
                                         imgui.FTextCenter(u8('{Text}Уровень VIP: {ButtonActive}' .. (arr['vipLabel'] or 'Неизвестно')), 300)
-                                        imgui.FTextCenter(u8('{Text}Номер телефона: {ButtonActive}' .. (arr['phoneNumber']) or 'Отсутствует'), 300)
+                                        imgui.FTextCenter(u8('{Text}Номер телефона: {ButtonActive}' .. (arr['phoneNumber'] or 'Отсутствует')), 300)
                                         imgui.FTextCenter(u8('{Text}Состояние: {ButtonActive}' .. (arr['isOnline'] and 'Онлайн' or 'Оффлайн')), 300)
                                     imgui.EndGroup()
                                     imgui.SameLine()
@@ -688,6 +688,7 @@ function getPlayerInformation(nick, currentServer, captcha)
             log('getPlayerInformation: Response')
             if response.status_code == 200 then
                 log('getPlayerInformation: status_code 200')
+                print(response.text)
                 if decodeJson(response.text)['status'] == 'captcha' then
                     log('getPlayerInformation: Пришла капча')
                     local path_download = getWorkingDirectory() .. '/vprikol/captcha.png'
