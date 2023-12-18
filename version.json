@@ -1,13 +1,13 @@
 {
     "version": {
-        "v": "1.2.1",
+        "v": "1.2.2",
         "url": "https://raw.githubusercontent.com/evans-dev1/vprikol-lua/main/vprikol.lua"
     },
     "update": {
-        "title": "Beta release 1.2.1",
+        "title": "Beta release 1.2.2",
         "mandatory": true,
         "text": [
-            "Поддержка упрощенного финда"
+            "Поддержка упрощенного финда [fix]"
         ]
     }
 }
